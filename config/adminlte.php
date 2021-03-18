@@ -45,7 +45,7 @@ return [
     |
     */
 
-    'logo' => '<b>Inventario</b>APP',
+    'logo' => '<b>Inventario</b>App',
     'logo_img' => 'vendor/adminlte/dist/img/LOGO.png',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
@@ -54,7 +54,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | user Menu
+    | User Menu
     |--------------------------------------------------------------------------
     |
     | Here you can activate and change the user menu.
@@ -126,7 +126,7 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => 'container-fluid',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-light-info elevation-4',
+    'classes_sidebar' => 'sidebar-dark-info elevation-4',
     'classes_sidebar_nav' => 'nav-child-indent nav-flat',
     'classes_topnav' => 'navbar-white navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
@@ -266,9 +266,14 @@ return [
             'url'         => '#',
             'icon'        => 'fab fa-fw fa-linode',
         ],
+        // [
+        //     'text'        => 'Productos',
+        //     'url'         => '#',
+        //     'icon'        => 'fas fa-fw fa-shopping-cart',
+        // ],
         [
-            'text'        => 'Productos',
-            'url'         => '#',
+            'text'        => 'Articulos',
+            'route'         => 'article.index',
             'icon'        => 'fas fa-fw fa-shopping-cart',
         ],
         ['header' => 'account_settings'],
@@ -364,16 +369,6 @@ return [
                 ],
             ],
         ],
-        'Sweetalert' => [
-            'active' => true,
-            'files' => [
-                [
-                    'type' => 'js',
-                    'asset' => true,
-                    'location' => 'vendor/sweetalert/sweetalert.all.js',
-                ],
-            ],
-        ],
         'Sweetalert2' => [
             'active' => false,
             'files' => [
@@ -400,16 +395,16 @@ return [
             ],
         ],
         /* Created */
-        'FontAwesome' => [
+        'Sweetalert' => [
             'active' => true,
             'files' => [
                 [
-                    'type' => 'css',
-                    'asset' => false,
-                    'location' => 'vendor/fontawesome-free/all.min.css',
+                    'type' => 'js',
+                    'asset' => true,
+                    'location' => 'vendor/sweetalert/sweetalert.all.js',
                 ],
             ],
-        ],
+        ]
     ],
 
     /*

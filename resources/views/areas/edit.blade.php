@@ -24,7 +24,7 @@
         </div>
 
         <div class="card-body">
-            <form action="{{ route('area.update') }}" method="post">
+            <form action="{{ route('area.update',$area) }}" method="post">
                 @csrf
                 @method('PATCH')
                 <div class="input-group mb-3">
@@ -40,15 +40,6 @@
 @stop
 
 @section('css')
-<style>
-    input:focus {
-        background-color: grey;
-    }
-</style>
 @stop
 @section('js')
-<script>
-$(document).ready(function() {
-});
-</script>
 @stop

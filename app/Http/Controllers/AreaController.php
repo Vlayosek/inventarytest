@@ -21,12 +21,21 @@ class AreaController extends Controller
     public function store(Request $request)
     {
         $storeData = $request->validate([
-            'name' => 'required|max:255',
+            'name' => 'required|max:255|unique:areas,name',
         ]);
 
-        $area = Area::create($storeData);
+       $area=Area::create($storeData);
 
-        return redirect('/area')->with('success', 'Area creada con Éxito!');
+        if($area)
+        {
+            flash("Area creada con Exito");
+            return redirect('/area');
+        }else{
+            flash("Error al crear Area");
+            return redirect('/area');
+        }
+
+
     }
 
     public function show(Area $area)
@@ -42,24 +51,49 @@ class AreaController extends Controller
 
     public function update(Request $request, Area $area)
     {
-        dd($request);
         $updateData = $request->validate([
-            'name' => 'required|max:255',
-            'email' => 'required|max:255',
-            'phone' => 'required|numeric',
-            'password' => 'required|max:255',
+            'name' => 'required|max:255|unique:areas,name',
         ]);
-        Area::whereId($id)->update($updateData);
-        return redirect('/students')->with('completed', 'Student has been updated');
+
+        $area= Area::whereId($request->area_id)->update($updateData);
+
+        if($area)
+        {
+            flash("Area Actualizada con Exito");
+            return redirect('/area');
+        }else{
+            flash("Error al actualizar Area");
+            return redirect('/area');
+        }
     }
 
     public function destroy(Area $area)
     {
+        /* dd($area); */
         $area = Area::findOrFail($area->id);
         $area->status = 'I';
 
         $area->save();
 
-        return redirect('/area')->with('sucess','Area anulada completamente');
+        flash("Area Eliminada con Exito");
+
+        return redirect()->back();
+    }
+
+    public function fillTable(){
+
+        return datatables()
+        ->eloquent(Area::query())
+        ->addColumn('areabtn','actions.areabtn')
+        ->addColumn('areabadge',function($area){
+            if($area->status == 'A'){
+                return '<span class="badge badge-pill badge-success p-2">Activo</span>';
+            }
+            else{
+                return '<span class="badge badge-pill badge-danger p-2">Inactivo</span>';
+            }
+        })
+        ->rawColumns(['areabtn','areabadge'])
+        ->toJson();
     }
 }

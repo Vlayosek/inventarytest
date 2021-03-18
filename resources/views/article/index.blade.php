@@ -1,16 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Usuarios')
+@section('title', 'Articulos')
 
 @section('content_header')
     {{-- <div class="row mb-2">
         <div class="col-sm-6">
-            <h1>Usuarios</h1>
+            <h1>Area</h1>
         </div>
         <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a></li>
-                <li class="breadcrumb-item active">Usuarios</li>
+                <li class="breadcrumb-item active">Area</li>
             </ol>
         </div>
     </div> --}}
@@ -23,60 +23,46 @@
             <div class="card">
                 <div class="card-body">
                         <div class="col-sm-12">
-                            <a class="btn btn-info" href="{{ route('user.create') }}"><i class="fas fa-user-plus">Crear</i></a>
+                            <a class="btn btn-info" href="{{ route('article.create') }}">Crear</a>
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a></li>
-                                <li class="breadcrumb-item active">Usuarios</li>
+                                <li class="breadcrumb-item active">Articulos</li>
                             </ol>
                         </div>
                 </div>
             </div>
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">{{ __('Lista de Usuarios') }}</h3>
+                    <h3 class="card-title">{{ __('Lista de Articulos') }}</h3>
                 </div>
 
                 <div class="card-body">
-
-                    <table id="tblUser" class="table table-striped table-bordered table-hover">
-                        <thead style="text-align: center">
+                    <table id="tblArticles" class="table table-striped table-bordered table-hover">
+                        <thead>
                             <tr>
-                                <th width="10px">Id</th>
+                                <th>Id</th>
                                 <th>Nombres</th>
-                                <th>Email</th>
                                 <th>Status</th>
-                                <th>Fecha Ingreso</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody style="text-align: center">
-                            @foreach ($users as $user)
+                        {{-- <tbody>
+                            @foreach ($areas as $area)
                             <tr>
-                                <td>{{ $user->id }}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->email }}</td>
-                                @if ($user->status == 'A')
-                                    <td><span class="badge bg-success">Activo</span></td>
-                                @else
-                                    <td><span class="badge bg-danger">Inactivo</span></td>
-                                @endif
+                                <td>{{ $area->id }}</td>
+                                <td>{{ $area->name }}</td>
+                                <td>{{ $area->status }}</td>
                                 <td>
-                                    <?php
-                                    $date = date_create($user->created_at);
-                                    echo date_format($date, 'd-m-Y');
-                                    ?>
-                                </td>
-                                <td>
-                                    <a href="{{ route('user.edit', $user->id) }}" class="btn btn-info">
-                                        <i class="fas fa-user-edit"></i>
+                                    <a href="{{ route('area.edit', $area->id) }}" class="btn btn-info">
+                                        <span class="glyphicon glyphicon-pencil"></span> Editar
                                     </a>
-                                    <a href="{{ route('user.edit',$user->id) }}" class="btn btn-danger">
-                                        <i class="fas fa-user-slash"></i>
+                                    <a href="{{ route('area.destroy',$area->id) }}" class="btn btn-danger">
+                                        <span class="glyphicon glyphicon-remove"></span> Anular
                                     </a>
                                 </td>
                             </tr>
                             @endforeach
-                        </tbody>
+                        </tbody> --}}
                     </table>
                 </div>
             </div>
@@ -86,13 +72,12 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
-@stop
 
+@stop
 @section('js')
 <script>
 $(document).ready(function() {
-    $('#tblUser').DataTable({
+    $('#tblArticles').DataTable({
         "paging": true,
         "lengthChange": true,
         "searching": true,
@@ -102,7 +87,7 @@ $(document).ready(function() {
         "responsive": true,
         "language": {
             "emptyTable": "No hay información",
-            "info": "_TOTAL_ Registros",
+            "info": "Mostrando _START_ a _END_ de _TOTAL_ Registros",
             "infoEmpty": "Mostrando 0 to 0 of 0 Registros",
             "infoFiltered": "(Filtrado de _MAX_ total Registros)",
             "thousands": ",",
@@ -120,19 +105,6 @@ $(document).ready(function() {
         },
 
     });
-    // $('#tblUser').DataTable({
-    //     "responsive": true,
-    //     "serverside": true,
-    //     "ajax": "{{ url('/user/filltable') }}",
-    //     "columns":[
-    //         {data: 'id'},
-    //         {data: 'name'},
-    //         {data: 'email'},
-    //         {data: 'created_at'},
-    //         {data: 'btn'}
-    //     ]
-    // });
 });
 </script>
-
 @stop

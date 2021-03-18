@@ -21,6 +21,7 @@ Route::get('/', function () {
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/user/filltable',[UserController::class, 'fillTable'])->name('user.table');
 Route::resource('user', UserController::class);
+Route::get('/area/filltable',[AreaController::class, 'fillTable'])->name('area.table');
 Route::resource('area', AreaController::class);
 Route::resource('article', ArticleController::class);
 Route::resource('category', CategoryController::class);
@@ -32,3 +33,9 @@ Route::resource('product', ProductController::class);
 Route::resource('supplier', ProveedorController::class);
 
 Auth::routes();
+
+
+
+// Route::get('/home', function() {
+//     return view('home');
+// })->name('home')->middleware('auth');
