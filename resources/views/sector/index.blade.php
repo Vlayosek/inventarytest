@@ -12,12 +12,12 @@
             <div class="card">
                 <div class="card-body">
                         <div class="col-sm-12">
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#create_area">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#create_sector">
                                 <i class="fas fa-plus">Crear</i>
                             </button>
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a></li>
-                                <li class="breadcrumb-item active">Area</li>
+                                <li class="breadcrumb-item active">Sector</li>
                             </ol>
                         </div>
                 </div>
@@ -25,43 +25,37 @@
             @include('flash::message')
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">{{ __('Lista de Areas') }}</h3>
+                    <h3 class="card-title">{{ __('Lista de Sectores') }}</h3>
                 </div>
 
                 <div class="card-body">
-                    <table id="tblAreas" class="table table-striped table-bordered table-hover">
+                    <table id="tblSectores" class="table table-striped table-bordered table-hover">
                         <thead style="text-align: center">
                             <tr>
-                                <th width="10px">Id</th>
-                                <th>Nombres</th>
+                                <th>Id</th>
+                                <th>Nombre</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody style="text-align: center">
-                                @forelse ($areas as $area)
+                                @forelse ($sectors as $sector)
                                 <tr>
-                                    <td>{{ $area->id }}</td>
-                                    <td>{{ $area->name }}</td>
-                                    @if ($area->status == 'A')
+                                    <td>{{ $sector->id }}</td>
+                                    <td>{{ $sector->name }}</td>
+                                    @if ($sector->status == 'A')
                                         <td><span class="badge badge-pill badge-success p-2">Activo</span></td>
                                     @else
                                         <td><span class="badge badge-pill badge-danger p-2">Inactivo</span></td>
                                     @endif
                                     <td>
-                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#edit_area_{{ $area->id }}">
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#edit_sector_{{ $sector->id }}">
                                             <i class="fas fa-edit"></i>
                                         </button>
-                                        @if($area->status=='A')
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete_area_{{ $area->id }}">
+                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete_sector_{{ $sector->id }}">
                                             <i class="fa fa-ban"></i>
                                         </button>
-                                        @else
-                                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#delete_area_{{ $area->id }}">
-                                                <i class="fa fa-check"></i>
-                                            </button>
-                                        @endif
-                                        @include('areas.modal')
+                                        @include('sector.modal')
                                     </td>
                                 </tr>
                                 @empty
@@ -73,6 +67,7 @@
                     </table>
                 </div>
             </div>
+            {{-- @include('areas.modal') --}}
         </div>
     </div>
 </div>
@@ -84,8 +79,6 @@
 @section('js')
 <script src="{{ asset('js/main.js') }}"></script>
 <script>
-$(document).ready(function() {
     $('div.alert').not('.alert-important').delay(3000).fadeOut(350);
-});
 </script>
 @stop

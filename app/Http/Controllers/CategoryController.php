@@ -7,80 +7,82 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
         $categories = Category::all();
-        return view('article.index',compact('categories'));
+        return view('categories.index',compact('categories'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('categories.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $storeData = $request->validate([
+            'name' => 'required|max:255|unique:categories,name',
+        ]);
+
+       $area=Category::create($storeData);
+
+        if($area)
+        {
+            flash("Categoría creada con Exito");
+            return redirect('/category');
+        }else{
+            flash("Error al crear Categoría");
+            return redirect('/category');
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
     public function show(Category $category)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
     public function edit(Category $category)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, Category $category)
     {
-        //
+        //dd($request);
+
+        $updateData = $request->validate([
+            'name' => 'required|max:255|unique:areas,name',
+        ]);
+
+        $category= Category::whereId($request->category_id)->update($updateData);
+
+        if($category)
+        {
+            flash("Categoria Actualizada con Exito");
+            return redirect('/category');
+        }else{
+            flash("Error al actualizar Categoria");
+            return redirect('/category');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Category $category)
     {
-        //
+        //dd($category);
+        if($category->status == 'A'){
+            $category = Category::findOrFail($category->id);
+            $category->status = 'I';
+            $category->save();
+            flash("Categoria Inhabilitada con Éxito");
+        }
+        else{
+            $category = Category::findOrFail($category->id);
+            $category->status = 'A';
+            $category->save();
+            flash("Categoria Habilitada con Éxito");
+        }
+
+        return redirect()->back();
     }
 }

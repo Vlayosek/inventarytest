@@ -21,7 +21,7 @@
         </style>
 
         <!-- Smartsupp Live Chat script -->
-        <script type="text/javascript">
+        {{-- <script type="text/javascript">
             var _smartsupp = _smartsupp || {};
             _smartsupp.key = '464032b5c848e39bb2bbfd6801e7a07c5ac16832';
             window.smartsupp||(function(d) {
@@ -30,7 +30,7 @@
             c.type='text/javascript';c.charset='utf-8';c.async=true;
             c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
             })(document);
-        </script>
+        </script> --}}
     </head>
     <body class="antialiased">
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center sm:pt-0">

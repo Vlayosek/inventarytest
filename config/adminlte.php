@@ -67,9 +67,9 @@ return [
     'usermenu_enabled' => true,
     'usermenu_header' => true,
     'usermenu_header_class' => 'bg-info',
-    'usermenu_image' => false,
+    'usermenu_image' => true,
     'usermenu_desc' => true,
-    'usermenu_profile_url' => false,
+    'usermenu_profile_url' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -252,34 +252,46 @@ return [
                 [
                     'text' => 'Administrar Roles',
                     'icon' => 'fas fa-fw fa-user',
-                    'route'  => 'user.index',
+                    'route'  => 'rol.index',
+                ],
+                [
+                    'text' => 'Employee',
+                    'icon' => 'fas fa-fw fa-user',
+                    'route'  => 'employee.index',
                 ],
             ],
         ],
         [
-            'text'        => 'Areas',
-            'route'       => 'area.index',
-            'icon'        => 'fas fa-fw fa-list',
+            'text'  => 'Mantenimiento',
+            'url'   => '#',
+            'icon'  => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text'  => 'Areas',
+                    'route' => 'area.index',
+                    'icon'  => 'fas fa-fw fa-list',
+                ],
+                [
+                    'text'  => 'Categorias',
+                    'route'   => 'category.index',
+                    'icon'  => 'fab fa-fw fa-linode',
+                ],
+                [
+                    'text'  => 'Sectores',
+                    'route'   => 'sector.index',
+                    'icon'  => 'fab fa-fw fa-linode',
+                ],
+            ],
         ],
         [
-            'text'        => 'Categorias',
-            'url'         => '#',
-            'icon'        => 'fab fa-fw fa-linode',
-        ],
-        // [
-        //     'text'        => 'Productos',
-        //     'url'         => '#',
-        //     'icon'        => 'fas fa-fw fa-shopping-cart',
-        // ],
-        [
-            'text'        => 'Articulos',
-            'route'         => 'article.index',
+            'text'        => 'Equipos Activos',
+            'route'         => 'activeequipment.index',
             'icon'        => 'fas fa-fw fa-shopping-cart',
         ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
-            'url'  => 'admin/settings',
+            'url'  => 'profile/username',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
@@ -329,32 +341,32 @@ return [
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/js/jquery.dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/js/dataTables.bootstrap4.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
-                    'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
+                    'asset' => true,
+                    'location' => 'vendor/datatables/css/dataTables.bootstrap4.min.css',
                 ],
             ],
         ],
         'Select2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
                 ],
             ],
@@ -370,7 +382,7 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
@@ -404,7 +416,17 @@ return [
                     'location' => 'vendor/sweetalert/sweetalert.all.js',
                 ],
             ],
-        ]
+        ],
+        'icheck-bootstrap' => [
+            'active' => true,
+            'files' => [
+                [
+                    'type' => 'css',
+                    'asset' => true,
+                    'location' => 'vendor/icheck-bootstrap/icheck-bootstrap.css',
+                ],
+            ],
+        ],
     ],
 
     /*

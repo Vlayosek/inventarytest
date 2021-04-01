@@ -24,4 +24,8 @@ class HomeController extends Controller
 
         return view('home',compact('areas','users','categories','products'));
     }
+
+    public function profile(){
+        return view ('user.profile');
+    }
 }

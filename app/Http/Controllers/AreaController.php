@@ -10,7 +10,8 @@ class AreaController extends Controller
     public function index()
     {
         $areas = Area::all();
-        return view ('areas.index',compact('areas'));
+        //dd($areas);
+        return view('areas.index',compact('areas'));
     }
 
     public function create()
@@ -69,13 +70,20 @@ class AreaController extends Controller
 
     public function destroy(Area $area)
     {
-        /* dd($area); */
-        $area = Area::findOrFail($area->id);
-        $area->status = 'I';
+        //dd($area);
 
-        $area->save();
-
-        flash("Area Eliminada con Exito");
+        if($area->status == 'A'){
+            $area = Area::findOrFail($area->id);
+            $area->status = 'I';
+            $area->save();
+            flash("Area Inhabilitada con Éxito");
+        }
+        else{
+            $area = Area::findOrFail($area->id);
+            $area->status = 'A';
+            $area->save();
+            flash("Area Habilitada con Éxito");
+        }
 
         return redirect()->back();
     }

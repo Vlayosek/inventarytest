@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Areas')
+@section('title', 'Employee')
 
 @section('content_header')
 @stop
@@ -12,12 +12,12 @@
             <div class="card">
                 <div class="card-body">
                         <div class="col-sm-12">
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#create_area">
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#create_employee">
                                 <i class="fas fa-plus">Crear</i>
                             </button>
                             <ol class="breadcrumb float-sm-right">
                                 <li class="breadcrumb-item"><a href="{{ url('/home') }}">Home</a></li>
-                                <li class="breadcrumb-item active">Area</li>
+                                <li class="breadcrumb-item active">Employee</li>
                             </ol>
                         </div>
                 </div>
@@ -39,7 +39,7 @@
                             </tr>
                         </thead>
                         <tbody style="text-align: center">
-                                @forelse ($areas as $area)
+                                {{-- @forelse ($areas as $area)
                                 <tr>
                                     <td>{{ $area->id }}</td>
                                     <td>{{ $area->name }}</td>
@@ -68,7 +68,7 @@
                                 <tr>
                                     <td colspan="4">No hay datos a mostrar</td>
                                 </tr>
-                                @endforelse
+                                @endforelse --}}
                         </tbody>
                     </table>
                 </div>
